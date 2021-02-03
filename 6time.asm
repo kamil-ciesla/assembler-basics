@@ -1,3 +1,6 @@
+
+; Program that displays current time.
+
 .model tiny
 .stack 256
 .data
@@ -79,7 +82,7 @@ START:
     mov dx, offset time
     mov ah, 9
     int 21h
-    ; end program
+    ; call function ending program
     mov ah, 4ch
     int 21h
 END START

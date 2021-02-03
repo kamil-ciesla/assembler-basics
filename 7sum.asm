@@ -1,24 +1,30 @@
+
+; Program that sums up two one-digit numbers entered by user, and displays the sum.
+; note 1: Program doesn't display msg4, only sum is displayed
+; note 2: program works properly only if the sum is not greater than 9. 
+; Otherwise, the sum isn't displayed correctly.
+
 .model tiny
 .stack 256
 .data
-    kom1 db 'Sumowanie liczb jednocyfrowych', '$'
-    kom2 db 13, 10, 'Podaj pierwsza liczbe: ','$'
-    kom3 db 13, 10, 'Podaj druga liczbe: ','$'
-    kom4 db 13, 10, 'Suma to: ', '$'
+    msg1 db 'Summing two one-digit numbers', '$'
+    msg2 db 13, 10, 'Enter first number: ','$'
+    msg3 db 13, 10, 'Enter second number: ','$'
+    msg4 db 13, 10, 'Sum: ', '$'
     sum db 2, 0, "  $"
 
 .code
 START:
-    ; display kom1
-    mov bx, seg kom1
+    ; display msg1
+    mov bx, seg msg1
     mov ds, bx
-    mov dx, offset kom1
+    mov dx, offset msg1
     mov ah, 9
     int 21h
-    ; display kom2
-    mov bx, seg kom2
+    ; display msg2
+    mov bx, seg msg2
     mov ds, bx
-    mov dx, offset kom2
+    mov dx, offset msg2
     mov ah, 9
     int 21h
     ; ask for keyboard input
@@ -27,15 +33,15 @@ START:
     mov dx, offset sum
     mov ah, 0Ah
     int 21h
-    ; get number from input cl
+    ; get number from input into cl
     mov bx, dx
     add bx, 2
     mov cl, ds:[bx]
     and cl, 0fh
-    ; display kom3
-    mov bx, seg kom3
+    ; display msg3
+    mov bx, seg msg3
     mov ds, bx
-    mov dx, offset kom3
+    mov dx, offset msg3
     mov ah, 9
     int 21h
     ; ask for keyboard input
@@ -55,10 +61,10 @@ START:
     add cl, 48
     ; move summed numbers into sum
     mov ds:[bx], cl
-    ; display kom4
-    mov bx, seg kom4
+    ; display msg4
+    mov bx, seg msg4
     mov ds, bx
-    mov dx, offset kom4
+    mov dx, offset msg4
     mov ah, 9
     int 21h
     ; display sum
@@ -68,7 +74,7 @@ START:
     add dx, 2
     mov ah, 9
     int 21h
-    ; end program
+    ; call function ending program
     mov ah, 4ch
     int 21h
 END START
